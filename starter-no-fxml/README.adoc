@@ -1,0 +1,21 @@
+= JavaFX Starter image:https://travis-ci.org/daggerok/javafx-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/javafx-examples"]
+
+//tag::content[]
+
+This is just an JavaFX starter project...
+
+.gradle
+[source,bash]
+----
+bash gradlew clean build
+java -jar app/build/libs/*-all.jar
+----
+
+.maven
+[source,bash]
+----
+bash mvnw clean package
+java -jar app/target/*-all.jar
+----
+
+//end::content[]

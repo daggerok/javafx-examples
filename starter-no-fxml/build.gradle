@@ -1,0 +1,60 @@
+buildscript {
+  ext {
+    kotlinVersion = "1.2.10"
+    lombokVersion = "1.16.18"
+    slf4jVersion = "1.7.25"
+    javaVer = "1.8"
+  }
+
+  repositories {
+    jcenter()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+  }
+}
+
+allprojects {
+
+  apply plugin: "base"
+  apply plugin: "maven"
+
+  group = "daggerok"
+  version = "0.0.1"
+}
+
+subprojects {
+
+  apply plugin: "java"
+  apply plugin: "groovy"
+  apply plugin: "kotlin"
+
+  sourceCompatibility = targetCompatibility = "$javaVer"
+
+  repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://repo.maven.apache.org/maven2" }
+  }
+
+  dependencies {
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile "org.slf4j:slf4j-jdk14:$slf4jVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+  }
+
+  compileKotlin {
+    kotlinOptions.jvmTarget = "$javaVer"
+  }
+
+  compileTestKotlin {
+    kotlinOptions.jvmTarget = "$javaVer"
+  }
+}

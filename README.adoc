@@ -6,6 +6,7 @@ This repository contains JavaFX playground projects examples.
 
 link:https://daggerok.github.io/javafx-examples[Documentation]
 
-. link:./starter/[JavaFX starter (supported: kotlin, gradle, maven)]
+. link:./starter/[JavaFX starter (supported: kotlin, gradle, maven) w/fxml]
+. link:./starter-no-fxml/[JavaFX starter (supported: kotlin, gradle, maven) wo/fxml]
 
 //end::content[]

@@ -20,6 +20,7 @@ script:
   # starter
   - >
     for project in \
+      starter-no-fxml \
       starter \
     ; do
 

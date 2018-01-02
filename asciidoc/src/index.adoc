@@ -15,6 +15,6 @@ Maksim Kostromin <daggerok@gmail.com>
 include::includes/Introduction.adoc[]
 
 == JavaFX Starter (gradle, maven, java, kotlin)
-include::../../starter/README.adoc[tags=content]
+include::../../starter-no-fxml/README.adoc[tags=content]
 
 == Enjoy! :)

@@ -48,3 +48,4 @@ clean.doFirst {
 
 assemble.dependsOn asciidoctor
 asciidoctor.shouldRunAfter clean
+docs.shouldRunAfter clean
