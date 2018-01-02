@@ -1,0 +1,36 @@
+group: travis_lts
+
+env:
+  global:
+    TERM=dumb
+
+language: java
+jdk: oraclejdk8
+
+install: true
+
+script:
+  #- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+  #- stop_any 5432 5672 27017 8080
+
+  - bash gradlew clean build docs
+
+  - export parent=$(pwd)
+
+  # starter
+  - >
+    for project in \
+      starter \
+    ; do
+
+      cd ${parent}/${project}
+
+      bash gradlew clean build
+      bash mvnw clean package -U
+
+    done;
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
