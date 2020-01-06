@@ -4,9 +4,19 @@
 
 This repository contains JavaFX playground projects examples.
 
-link:https://daggerok.github.io/javafx-examples[Documentation]
 
-. link:./starter/[JavaFX starter (supported: kotlin, gradle, maven) w/fxml]
-. link:./starter-no-fxml/[JavaFX starter (supported: kotlin, gradle, maven) wo/fxml]
+== projects
+
+- link:./starter/[JavaFX starter (supported: kotlin, gradle, maven) w/fxml]
+- link:./starter-no-fxml/[JavaFX starter (supported: kotlin, gradle, maven) wo/fxml]
+
+== resources
+
+- link:https://daggerok.github.io/javafx-examples[Documentation]
+- link:https://maven.apache.org/guides/index.html[Official Apache Maven documentation]
+- link:https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/maven-plugin/[Spring Boot Maven Plugin Reference Guide]
+- link:https://docs.spring.io/spring/docs/5.2.2.RELEASE/spring-framework-reference/languages.html#coroutines[Coroutines section of the Spring Framework Documentation]
+- link:https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#using-boot-devtools[Spring Boot DevTools]
+- link:https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/reference/htmlsingle/#configuration-metadata-annotation-processor[Spring Configuration Processor]
 
 //end::content[]
