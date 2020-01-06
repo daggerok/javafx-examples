@@ -12,6 +12,7 @@ This repository contains JavaFX playground projects examples.
 
 == resources
 
+- https://openjfx.io/openjfx-docs/
 - link:https://daggerok.github.io/javafx-examples[Documentation]
 - link:https://maven.apache.org/guides/index.html[Official Apache Maven documentation]
 - link:https://docs.spring.io/spring-boot/docs/2.2.2.RELEASE/maven-plugin/[Spring Boot Maven Plugin Reference Guide]
