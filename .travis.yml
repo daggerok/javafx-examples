@@ -1,37 +1,104 @@
-group: travis_lts
-
-env:
-  global:
-    TERM=dumb
-
+notifications:
+  email: false
+git:
+  quiet: true
+  depth: false
 language: java
-jdk: oraclejdk8
-
+jdk: openjdk11
+node_js: lts/*
+#services:
+#  - xvfb
+python: 3.7
+addons:
+  apt:
+    update: false
+    packages:
+      - curl
+      - python3-pip
+#      - libappindicator1
+#      - fonts-liberation
+#      - google-chrome-stable
+      - unzip
+      - wget
 install: true
-
-script:
-  #- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
-  #- stop_any 5432 5672 27017 8080
-
-  - bash gradlew clean build docs
-
-  - export parent=$(pwd)
-
-  # starter
-  - >
-    for project in \
-      starter-no-fxml \
-      starter \
-    ; do
-
-      cd ${parent}/${project}
-
-      bash gradlew clean build
-      bash mvnw clean package -U
-
-    done;
-
+before_install:
+  #  - |
+  #    export CHROME_BIN=/usr/bin/google-chrome
+  #    export DISPLAY=:99.0
+  #- |
+  # rm -rf ~/.local/daggerok
+  # if [ ! -f ${HOME}/.local/daggerok/openjfx/openjfx-11.0.2_linux-x64_bin-sdk.zip ] ; then
+  #   mkdir -p ${HOME}/.local/daggerok/openjfx
+  #   wget https://download2.gluonhq.com/openjfx/11.0.2/openjfx-11.0.2_linux-x64_bin-sdk.zip -O ${HOME}/.local/daggerok/openjfx/openjfx-11.0.2_linux-x64_bin-sdk.zip
+  # fi
+  # unzip -d ${HOME}/.local/daggerok/openjfx ${HOME}/.local/daggerok/openjfx/openjfx-11.0.2_linux-x64_bin-sdk.zip
+  # sudo cp -arfv ${HOME}/.local/daggerok/openjfx/javafx-sdk-11.0.2/lib/* ${JAVA_HOME}/lib/
+  # rm -rf ${HOME}/.local/daggerok/openjfx
+  - |
+    if [ ! -f ${HOME}/.local/daggerok/bash-functions/master/main.bash ] ; then
+      mkdir -p ${HOME}/.local/daggerok/bash-functions/master
+      curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash > ${HOME}/.local/daggerok/bash-functions/master/main.bash
+    fi
+    source ${HOME}/.local/daggerok/bash-functions/master/main.bash
+    stop_any 3000 5000
+  - |
+    export PATH=$HOME/.local/bin:$PATH
+    pip3 install --user --upgrade pip setuptools
+    pip install --user --upgrade httpie
+jobs:
+  include:
+    - stage: test
+      name: maven spring-boot-kotlin-stock
+      env:
+        - SUB_PROJECT=spring-boot-kotlin-stock
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+    - stage: test
+      name: maven starter-no-fxml
+      env:
+        - SUB_PROJECT=starter-no-fxml
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+    - stage: test
+      name: maven starter
+      env:
+        - SUB_PROJECT=starter
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+    - stage: test
+      name: gradle starter-no-fxml
+      env:
+        - SUB_PROJECT=starter-no-fxml
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./gradlew clean build
+    - stage: test
+      name: gradle starter
+      env:
+        - SUB_PROJECT=starter
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./gradlew clean build
+    - stage: deploy
+      jdk: openjdk8
+      name: GitHub Pages
+      env:
+        - secure: "cVy0hVBdDSPR6FkLplq0GieZgf5DpTdF/yFPYCKvohi5zYve/WEyfVbsNEV2UaWZiFIPWQ8haUWO7LSF/DqZjt08S7Cnd9X1vikSvvxzn+PceTwtJ3l3wXPCaBCcX8W186U+v0SgrYH5tm275icUk9yC1Jd2Km48ipApxv/7zJD8+50zzi1koNmRKs/xun4n0xUK6Ec46h6BeISIj11VkxejlbQf3wLsHw26GTcdQwAfJD5tNKjAQUHVQngywdtFLDc4u+6fvIPcPEY6RMUiyh1IOPgaybnVGqIWR2fca8jgR4diCWdcjIv6Sd71/gNZ4YoYG7Mypn/mL8T3Fdb+nSWesOC6t+aCm+rM8MqWTgP7RnDi7vh77ow3qWmZDENZNgifwR2IzrzYftxjB3W7KxKnYwUzuRIGxLP3xYeeWcHRTkPLFVtOgv3/6/VsCZO1bhUUWRSva/0sHVLAPp4Vk3o/UCykDPRnl1L+cILp98ZeyGvFVqDPFD8Wd0WAy1hqQ95UP4lGQgz+vt5CDt2Dm6pCqEofcYju9dUymUx3xFf0qe4rHKFwBImyMIjz2QfZam17vXbf9ASaZOriecNaC48ziaF1cj86S90prEBZ9zQKb4VUa8MEQQ2eVsHGWQ7aMBvgRC42J+g8MBeMrjyETW7VJFGTYHw0EjjImn8kSpE="
+      script: skip
+      before_deploy:
+        - set -e
+        - cd $TRAVIS_BUILD_DIR && ./gradlew clean build docs
+        - cp -Rf $TRAVIS_BUILD_DIR/docs/index.html $TRAVIS_BUILD_DIR/docs/404.html
+        - echo "GitHub pages needs me..." > $TRAVIS_BUILD_DIR/docs/.nojekyll
+      deploy: &pages
+        provider: pages
+        skip-cleanup: true
+        keep-history: true
+        target_branch: gh-pages
+        github-token: "$GITHUB_TOKEN"
+        local-dir: $TRAVIS_BUILD_DIR/docs
+        on:
+          branch: master
+          condition: "$TRAVIS_PULL_REQUEST = false"
 cache:
+  npm: true
+  pip: true
+  packages: true
   directories:
-    - $HOME/.m2
-    - $HOME/.gradle
+    - ~/.n*
+    - ~/.local/daggerok
+    - ~/.gradle
+    - ~/.m2

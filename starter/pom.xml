@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-  <modelVersion>4.0.0</modelVersion>
-
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <kotlin.version>1.2.10</kotlin.version>
-    <junit.version>4.12</junit.version>
-    <slf4j.version>1.7.25</slf4j.version>
     <java.ver>1.8</java.ver>
+    <junit.version>4.12</junit.version>
+    <slf4j.version>1.7.26</slf4j.version>
+    <kotlin.version>1.3.61</kotlin.version>
+    <javafx.version>11.0.2</javafx.version>
+    <lombok.version>1.18.10</lombok.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven-assembly-plugin.version>3.2.0</maven-assembly-plugin.version>
+    <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+    <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
+    <maven-ear-plugin.version>3.0.2</maven-ear-plugin.version>
+    <maven-ejb-plugin.version>3.0.1</maven-ejb-plugin.version>
+    <maven-ejb-plugin.ejbVersion>3.1</maven-ejb-plugin.ejbVersion>
+    <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
+    <maven-javadoc-plugin.minmemory>128m</maven-javadoc-plugin.minmemory>
+    <maven-javadoc-plugin.maxmemory>512m</maven-javadoc-plugin.maxmemory>
+    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
   </properties>
 
+  <modelVersion>4.0.0</modelVersion>
   <groupId>daggerok</groupId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <artifactId>parent</artifactId>
   <packaging>pom</packaging>
 
@@ -23,9 +36,20 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.18</version>
+      <version>${lombok.version}</version>
       <optional>true</optional>
       <scope>provided</scope>
     </dependency>
@@ -67,10 +91,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0-M1</version>
+        <version>${maven-javadoc-plugin.version}</version>
         <configuration>
-          <minmemory>128m</minmemory>
-          <maxmemory>512m</maxmemory>
+          <minmemory>${maven-javadoc-plugin.minmemory}</minmemory>
+          <maxmemory>${maven-javadoc-plugin.maxmemory}</maxmemory>
         </configuration>
       </plugin>
 
@@ -78,7 +102,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
           <source>${java.ver}</source>
@@ -90,7 +114,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>${maven-resources-plugin.version}</version>
         <configuration>
           <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
@@ -100,7 +124,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>${maven-jar-plugin.version}</version>
         <configuration>
           <archive>
             <manifest>
@@ -114,7 +138,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.5</version>
+        <version>${maven-war-plugin.version}</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
@@ -124,9 +148,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-ejb-plugin</artifactId>
-        <version>2.3</version>
+        <version>${maven-ejb-plugin.version}</version>
         <configuration>
-          <ejbVersion>3.1</ejbVersion>
+          <ejbVersion>${maven-ejb-plugin.ejbVersion}</ejbVersion>
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
@@ -139,7 +163,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-ear-plugin</artifactId>
-        <version>2.8</version>
+        <version>${maven-ear-plugin.version}</version>
         <configuration>
           <archive>
             <manifest>

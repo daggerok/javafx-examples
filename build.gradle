@@ -1,6 +1,7 @@
 plugins { id "base" }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = "4.4.1"
-  distributionType = "ALL"
+wrapper {
+  gradleVersion = "5.6.4"
 }
+
+defaultTasks "clean", "build", "docs"

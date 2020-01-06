@@ -1,9 +1,11 @@
 buildscript {
   ext {
-    kotlinVersion = "1.2.10"
-    lombokVersion = "1.16.18"
-    slf4jVersion = "1.7.25"
-    javaVer = "1.8"
+    slf4jVersion = "1.7.26"
+    kotlinVersion = "1.3.61"
+    lombokVersion = "1.18.10"
+    javafxVersion = "11.0.2"
+    // javaVer = "1.8"
+    javaVer = "11"
   }
 
   repositories {
@@ -17,16 +19,16 @@ buildscript {
 }
 
 allprojects {
-
   apply plugin: "base"
   apply plugin: "maven"
 
   group = "daggerok"
   version = "0.0.1"
+
+  defaultTasks "clean", "build"
 }
 
 subprojects {
-
   apply plugin: "java"
   apply plugin: "groovy"
   apply plugin: "kotlin"
@@ -40,6 +42,9 @@ subprojects {
   }
 
   dependencies {
+    compile "org.openjfx:javafx-controls:$javafxVersion"
+    compile "org.openjfx:javafx-fxml:$javafxVersion"
+
     compile "org.slf4j:slf4j-api:$slf4jVersion"
     compile "org.slf4j:slf4j-jdk14:$slf4jVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"

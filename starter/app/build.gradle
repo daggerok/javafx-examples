@@ -1,8 +1,42 @@
 plugins {
   id "application"
-  id "com.github.johnrengelman.shadow" version "2.0.2"
+  id "org.openjfx.javafxplugin" version "0.0.8"
+  id "io.franzbecker.gradle-lombok" version "3.2.0"
+  id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
+javafx {
+  version = "$javaVer"
+  modules = [ "javafx.controls", "javafx.fxml" ]
+  // configuration = "compileOnly"
+  // sdk = "/path/to/javafx-sdk"
+}
+
+// dependencies {
+//   implementation "org.openjfx:javafx-controls:$javafxVersion"
+//   implementation "org.openjfx:javafx-fxml:$javafxVersion"
+// }
+
 mainClassName = "daggerok.App"
-shadowJar.mustRunAfter jar
-jar.enabled = false
+build.dependsOn(shadowJar)
+
+shadowJar {
+  mustRunAfter jar
+  // manifest {
+  //   attributes "Main-Class": mainClassName,
+  //              "Implementation-Title": "Gradle",
+  //              "Implementation-Version": project.version
+  // }
+  //
+  // dependencies {
+  //   exclude(dependency("org.openjfx:javafx-base:$javafx.version:$javafx.platform.classifier"))
+  //   exclude(dependency("org.openjfx:javafx-controls:$javafxVersion"))
+  //   exclude(dependency("org.openjfx:javafx-fxml:$javafxVersion"))
+  //   exclude(dependency("org.openjfx:javafx-graphics:$javafx.version:$javafx.platform.classifier"))
+  //   exclude(dependency("org.openjfx:javafx-media:$javafx.version:$javafx.platform.classifier"))
+  //   exclude(dependency("org.openjfx:javafx-swing:$javafx.version:$javafx.platform.classifier"))
+  //   exclude(dependency("org.openjfx:javafx-web:$javafx.version:$javafx.platform.classifier"))
+  // }
+  //
+  // exclude "module-info.class"
+}
