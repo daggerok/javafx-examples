@@ -48,9 +48,9 @@ before_install:
 jobs:
   include:
     - stage: test
-      name: maven spring-boot-kotlin-stock
+      name: maven spring-boot-kotlin
       env:
-        - SUB_PROJECT=spring-boot-kotlin-stock
+        - SUB_PROJECT=spring-boot-kotlin
       script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
     - stage: test
       name: maven starter-no-fxml
@@ -93,6 +93,9 @@ jobs:
         on:
           branch: master
           condition: "$TRAVIS_PULL_REQUEST = false"
+before_cache:
+  - find ~/.gradle -name "fileHashes.bin" -print0 | xargs -0 rm -rfv '{}'
+  - for item in $(find ~/.gradle -name "*.lock") ; do rm -rfv $item ; done
 cache:
   npm: true
   pip: true
