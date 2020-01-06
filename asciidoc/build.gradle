@@ -10,7 +10,7 @@ plugins {
 }
 
 group "daggerok"
-version "0.0.1"
+version "0.0.2"
 
 asciidoctorj {
   version = "1.5.5"
