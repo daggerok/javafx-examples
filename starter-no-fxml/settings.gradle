@@ -1,3 +1,0 @@
-rootProject.name = "parent"
-include ":app"
-project(":app").projectDir = "$rootDir/app" as File
