@@ -1,13 +1,19 @@
 package com.github.daggerok.ui
 
+import com.github.daggerok.client.StockPrice
 import com.github.daggerok.client.StockWebClient
 import javafx.application.Application
 import javafx.application.Platform
+import javafx.collections.FXCollections
+import javafx.collections.FXCollections.*
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.chart.LineChart
+import javafx.scene.chart.XYChart
+import javafx.scene.chart.XYChart.Data
+import javafx.scene.chart.XYChart.Series
 import javafx.stage.Stage
 import javafx.util.Callback
 import org.springframework.beans.factory.annotation.Value
@@ -20,13 +26,39 @@ import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.event.EventListener
 import org.springframework.core.io.Resource
 import org.springframework.stereotype.Component
+import java.util.function.Consumer
 import javax.annotation.PreDestroy
 
 data class StageReadyEvent(val stage: Any) : ApplicationEvent(stage)
 
+class PriceSubscriber(symbol: String) : Consumer<StockPrice> {
+  private val seriesData = observableArrayList<Data<String, Double>>()
+  val series = Series(symbol, seriesData)
+
+  override fun accept(price: StockPrice) = Platform.runLater {
+    val data = Data(price.time.second.toString(), price.price)
+    seriesData.add(data)
+  }
+}
+
 @Component
 class ChartController(private val client: StockWebClient) {
   @FXML lateinit var chart: LineChart<String, Double>
+
+  @FXML
+  fun initialize() {
+    chart.data = observableArrayList<Series<String, Double>>()
+
+    val symbol = "SYMBOL"
+    val priceSubscriber = PriceSubscriber(symbol)
+    chart.data.add(priceSubscriber.series)
+    client.pricesFor(symbol).subscribe(priceSubscriber)
+
+    val symbol2 = "SYMBOL2"
+    val priceSubscriber2 = PriceSubscriber(symbol2)
+    chart.data.add(priceSubscriber2.series)
+    client.pricesFor(symbol).subscribe(priceSubscriber2)
+  }
 }
 
 @Component

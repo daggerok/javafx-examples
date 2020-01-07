@@ -52,6 +52,7 @@ jobs:
       env:
         - SUB_PROJECT=stock
       before_script:
+        - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean install -DskipTests
         - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-service
         - java -jar $TRAVIS_BUILD_DIR/$SUB_PROJECT/stock-service/target/*-SNAPSHOT.jar &
         - wait_for 8000
