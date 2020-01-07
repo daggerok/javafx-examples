@@ -1,0 +1,22 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  application:
+    name: stock-service
+  rsocket:
+    server:
+      port: 7000
+server:
+  port: 8000
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - shutdown
+  endpoint:
+    shutdown:
+      enabled: on

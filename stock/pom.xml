@@ -13,10 +13,11 @@
     <modules>
         <module>stock-service</module>
         <module>stock-client</module>
+        <module>stock-ui</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.daggerok</groupId>
+    <groupId>com.github.daggerok.service.daggerok</groupId>
     <artifactId>stock</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -36,6 +37,18 @@
         <dependencies>
             <dependency>
                 <groupId>org.openjfx</groupId>
+                <artifactId>javafx-base</artifactId>
+                <version>${javafx.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>${javafx.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
                 <artifactId>javafx-graphics</artifactId>
                 <version>${javafx.version}</version>
                 <type>jar</type>
@@ -50,7 +63,8 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--<dependency>
+        <!--
+        <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
@@ -65,7 +79,8 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-reactor</artifactId>
-        </dependency>-->
+        </dependency>
+        -->
 
         <!--
         <dependency>

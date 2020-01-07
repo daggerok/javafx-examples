@@ -1,0 +1,17 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  application:
+    name: stock-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - shutdown
+  endpoint:
+    shutdown:
+      enabled: on

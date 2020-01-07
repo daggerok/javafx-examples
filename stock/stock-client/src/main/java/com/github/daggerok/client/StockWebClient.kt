@@ -1,4 +1,4 @@
-package com.github.daggerok
+package com.github.daggerok.client
 
 import org.apache.logging.log4j.LogManager
 import org.springframework.web.reactive.function.client.WebClient
@@ -10,7 +10,7 @@ class StockWebClient(private val webClient: WebClient) {
 
   fun pricesFor(symbol: String) =
       webClient.get()
-          .uri("http://127.0.0.1:8080/stocks/{symbol}", symbol)
+          .uri("http://127.0.0.1:8000/stocks/{symbol}", symbol)
           .retrieve()
           .bodyToFlux(StockPrice::class.java)
           .retryBackoff(3, ofSeconds(1), ofSeconds(5))

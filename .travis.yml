@@ -40,7 +40,7 @@ before_install:
       curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash > ${HOME}/.local/daggerok/bash-functions/master/main.bash
     fi
     source ${HOME}/.local/daggerok/bash-functions/master/main.bash
-    stop_any 3000 5000
+    stop_any 3000 5000 8000 7000 80
   - |
     export PATH=$HOME/.local/bin:$PATH
     pip3 install --user --upgrade pip setuptools
@@ -54,9 +54,11 @@ jobs:
       before_script:
         - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-service
         - java -jar $TRAVIS_BUILD_DIR/$SUB_PROJECT/stock-service/target/*-SNAPSHOT.jar &
-        - wait_for 8080
-      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-client
-      after_script: stop_any 8080 80
+        - wait_for 8000
+      script:
+        - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-client
+        - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-ui
+      after_script: http post :8000/actuator/shutdown
     - stage: test
       name: maven spring-boot-kotlin-javafx
       env:
