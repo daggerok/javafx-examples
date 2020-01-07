@@ -1,5 +1,6 @@
 package com.github.daggerok.ui
 
+import com.github.daggerok.client.StockWebClient
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.fxml.FXML
@@ -24,7 +25,7 @@ import javax.annotation.PreDestroy
 data class StageReadyEvent(val stage: Any) : ApplicationEvent(stage)
 
 @Component
-class ChartController {
+class ChartController(private val client: StockWebClient) {
   @FXML lateinit var chart: LineChart<String, Double>
 }
 

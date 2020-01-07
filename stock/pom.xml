@@ -59,6 +59,13 @@
                 <version>${javafx.version}</version>
                 <type>jar</type>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.daggerok.service.daggerok</groupId>
+                <artifactId>stock-client</artifactId>
+                <version>${project.version}</version>
+                <type>jar</type>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
