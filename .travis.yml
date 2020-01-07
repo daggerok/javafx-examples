@@ -15,10 +15,10 @@ addons:
     packages:
       - curl
       - python3-pip
-#      - libappindicator1
-#      - fonts-liberation
-#      - google-chrome-stable
-      - unzip
+      #- libappindicator1
+      #- fonts-liberation
+      #- google-chrome-stable
+      #- unzip
       - wget
 install: true
 before_install:
@@ -51,7 +51,12 @@ jobs:
       name: maven stock
       env:
         - SUB_PROJECT=stock
-      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+      before_script:
+        - cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-service
+        - java -jar $TRAVIS_BUILD_DIR/$SUB_PROJECT/stock-service/target/*-SNAPSHOT.jar &
+        - wait_for 8080
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-client
+      after_script: stop_any 8080 80
     - stage: test
       name: maven spring-boot-kotlin
       env:

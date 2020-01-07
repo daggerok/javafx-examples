@@ -12,6 +12,7 @@
 
     <modules>
         <module>stock-service</module>
+        <module>stock-client</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
