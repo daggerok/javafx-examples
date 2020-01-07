@@ -48,6 +48,11 @@ before_install:
 jobs:
   include:
     - stage: test
+      name: maven stock
+      env:
+        - SUB_PROJECT=stock
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+    - stage: test
       name: maven spring-boot-kotlin
       env:
         - SUB_PROJECT=spring-boot-kotlin
