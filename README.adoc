@@ -16,6 +16,7 @@ This repository contains JavaFX playground projects examples.
 - link:https://www.youtube.com/watch?v=po9vKGqhx8E[YouTube: Reactive Spring Boot: Part 1: Kotlin REST Service]
 - link:https://www.youtube.com/watch?v=ybPBxSpb18k[YouTube: Reactive Spring Boot: Part 2: Java REST Client]
 - link:https://www.youtube.com/watch?v=OPExIW61zws[YouTube: Reactive Spring Boot: Part 3: JavaFX Spring Boot Application]
+- link:https://www.youtube.com/watch?v=FefmhMSr8PE[YouTube: Reactive Spring Boot: Part 4: JavaFX Line Chart]
 - https://openjfx.io/openjfx-docs/
 - link:https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG[JavaFX Java GUI Design Tutorials]
 - link:https://www.youtube.com/watch?v=Lse51SpfKHo[YouTube: Fully Reactive: Spring, Kotlin, and JavaFX Playing Together]

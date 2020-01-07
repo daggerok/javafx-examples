@@ -58,6 +58,11 @@ jobs:
       script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw -f stock-client
       after_script: stop_any 8080 80
     - stage: test
+      name: maven spring-boot-kotlin-javafx
+      env:
+        - SUB_PROJECT=spring-boot-kotlin-javafx
+      script: cd $TRAVIS_BUILD_DIR/$SUB_PROJECT && ./mvnw clean package
+    - stage: test
       name: maven spring-boot-kotlin
       env:
         - SUB_PROJECT=spring-boot-kotlin
