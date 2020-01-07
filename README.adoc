@@ -21,6 +21,7 @@ This repository contains JavaFX playground projects examples.
 - link:https://www.youtube.com/watch?v=1ZJSaQ6ouIQ[YouTube: Reactive Spring Boot: Part 7: Subscribing Multiple Consumers]
 - link:https://www.youtube.com/watch?v=wmc3opStMXo[YouTube: Reactive Spring Boot: Part 8: Kotlin RSocket Server]
 - link:https://www.youtube.com/watch?v=9TlVsfcAJ7E[YouTube: Reactive Spring Boot: Part 9: Java RSocket Client]
+- link:https://www.youtube.com/watch?v=muQV-YCGipA[YouTube: Reactive Spring Boot: Part 10: Profiles to Switch Clients]
 - https://openjfx.io/openjfx-docs/
 - link:https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG[JavaFX Java GUI Design Tutorials]
 - link:https://www.youtube.com/watch?v=Lse51SpfKHo[YouTube: Fully Reactive: Spring, Kotlin, and JavaFX Playing Together]

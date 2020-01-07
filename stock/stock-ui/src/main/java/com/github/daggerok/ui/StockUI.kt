@@ -1,6 +1,7 @@
 package com.github.daggerok.ui
 
 import com.github.daggerok.client.StockPrice
+import com.github.daggerok.client.StockRSocketClient
 import com.github.daggerok.client.StockWebClient
 import javafx.application.Application
 import javafx.application.Platform
@@ -42,7 +43,8 @@ class PriceSubscriber(symbol: String) : Consumer<StockPrice> {
 }
 
 @Component
-class ChartController(private val client: StockWebClient) {
+class ChartController(private val webclient: StockWebClient,
+                      private val rSocketClient: StockRSocketClient) {
   @FXML lateinit var chart: LineChart<String, Double>
 
   @FXML
@@ -52,12 +54,12 @@ class ChartController(private val client: StockWebClient) {
     val symbol = "SYMBOL"
     val priceSubscriber = PriceSubscriber(symbol)
     chart.data.add(priceSubscriber.series)
-    client.pricesFor(symbol).subscribe(priceSubscriber)
+    webclient.pricesFor(symbol).subscribe(priceSubscriber)
 
     val symbol2 = "SYMBOL2"
     val priceSubscriber2 = PriceSubscriber(symbol2)
     chart.data.add(priceSubscriber2.series)
-    client.pricesFor(symbol).subscribe(priceSubscriber2)
+    rSocketClient.pricesFor(symbol).subscribe(priceSubscriber2)
   }
 }
 
