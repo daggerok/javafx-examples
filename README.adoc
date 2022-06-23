@@ -4,7 +4,7 @@
 This repository contains JavaFX playground projects examples.
 
 == projects
-
+- link:https://github.com/daggerok/kotlinfx[GitHub: daggerok/kotlinfx]
 - link:https://github.com/daggerok/javafx-spring-boot-app[GitHub: daggerok/javafx-spring-boot-app]
 - link:./spring-boot-kotlin/[Spring Boot Kotlin JavaFX starter]
 - link:./starter/[JavaFX starter (supported: kotlin, gradle, maven) w/fxml]
