@@ -81,3 +81,5 @@ A simple Spring Boot Kotlin JavaFX application starter
      }
    }
    ```
+
+See other JavaFX examples: https://github.com/daggerok/javafx-examples
