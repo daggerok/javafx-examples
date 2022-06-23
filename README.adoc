@@ -1,11 +1,11 @@
-= javafx-examples image:https://travis-ci.org/daggerok/javafx-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/javafx-examples"]
-
+= javafx-examples image:https://github.com/daggerok/javafx-examples/actions/workflows/ci.yaml/badge.svg["CI", link="https://github.com/daggerok/javafx-examples/actions/workflows/ci.yaml"] image:https://travis-ci.org/daggerok/javafx-examples.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/javafx-examples"]
 //tag::content[]
 
 This repository contains JavaFX playground projects examples.
 
 == projects
 
+- link:https://github.com/daggerok/javafx-spring-boot-app[GitHub: daggerok/javafx-spring-boot-app]
 - link:./spring-boot-kotlin/[Spring Boot Kotlin JavaFX starter]
 - link:./starter/[JavaFX starter (supported: kotlin, gradle, maven) w/fxml]
 - link:./starter-no-fxml/[JavaFX starter (supported: kotlin, gradle, maven) wo/fxml]
